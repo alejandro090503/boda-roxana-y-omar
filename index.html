@@ -2432,9 +2432,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   <p class="fam-ttl">Padrinos de Biblia</p>
   <div class="fam-card has-icon">
     <div class="fam-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:36px;height:36px;color:var(--peach)">
-        <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
-      </svg>
+      <img src="icon-biblia.webp" alt="" style="width:52px;height:auto;object-fit:contain">
     </div>
     <p class="fam-nms">Estela Regalado<span class="fam-sep">&amp;</span>Antonio Carreño</p>
   </div>
@@ -2444,9 +2442,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   <p class="fam-ttl">Padrinos de Cojín</p>
   <div class="fam-card has-icon">
     <div class="fam-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:36px;height:36px;color:var(--peach)">
-        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-      </svg>
+      <img src="icon-cojin.webp" alt="" style="width:52px;height:auto;object-fit:contain">
     </div>
     <p class="fam-nms">Citlali Pérez<span class="fam-sep">&amp;</span>Hugo Sánchez</p>
   </div>
@@ -2495,6 +2491,27 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 
 
 <!-- ═══════════════ 11.5 HOSPEDAJE ═══════════════════ -->
+<style>
+.hosp-card{position:relative;width:92%;max-width:340px;margin:0 auto 28px;border-radius:18px;overflow:hidden;background:rgba(255,255,255,.07);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.13);box-shadow:0 8px 32px rgba(0,0,0,.25)}
+.hosp-carousel{position:relative;width:100%;height:200px;overflow:hidden}
+.hosp-carousel img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
+.hosp-carousel img.active{opacity:1}
+.hosp-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 4px}
+.hosp-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);border:none;cursor:pointer;transition:background .3s}
+.hosp-dot.active{background:var(--peach)}
+.hosp-info{padding:14px 18px 18px;text-align:center}
+.hosp-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--cream);margin:0 0 2px}
+.hosp-loc{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(250,250,250,.55);margin:0 0 14px;font-style:italic}
+.hosp-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.hosp-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:30px;font-family:'Cormorant Garamond',serif;font-size:13.5px;font-weight:600;letter-spacing:.5px;text-decoration:none;transition:all .3s;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);color:var(--cream)}
+.hosp-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3);transform:translateY(-1px)}
+.hosp-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hosp-arrow{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;font-size:14px;transition:background .3s}
+.hosp-arrow:hover{background:rgba(0,0,0,.55)}
+.hosp-arrow.prev{left:8px}
+.hosp-arrow.next{right:8px}
+</style>
+
 <section id="lodging">
   <span class="lbl">Para tu estancia</span>
   <h2 class="ttl">Hospedaje Sugerido</h2>
@@ -2502,83 +2519,121 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;text-align:center;color:var(--cream);opacity:.78;max-width:300px;margin:0 auto 26px">Te recomendamos estas opciones cercanas al lugar de la celebración.</p>
 
   <!-- Hotel 1: Coral Club -->
-  <div class="loc-card hotel-card">
-    <h3 class="loc-name" style="margin-top:18px">Coral Club</h3>
-    <div aria-hidden="true" style="display:flex;justify-content:center;align-items:center;gap:8px;margin:8px auto 6px;color:var(--peach-accent)">
-      <span style="display:block;width:32px;height:1px;background:linear-gradient(to right,transparent,rgba(182,7,176,.55))"></span>
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Hotel">
-        <path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18"/>
-        <rect x="7" y="11" width="2.5" height="2.5" rx=".3"/><rect x="11" y="11" width="2.5" height="2.5" rx=".3"/><rect x="15" y="11" width="2.5" height="2.5" rx=".3"/>
-        <rect x="7" y="15.5" width="2.5" height="2.5" rx=".3"/><rect x="15" y="15.5" width="2.5" height="2.5" rx=".3"/>
-        <path d="M10.5 21v-3.5h3V21"/>
-      </svg>
-      <span style="display:block;width:32px;height:1px;background:linear-gradient(to left,transparent,rgba(182,7,176,.55))"></span>
+  <div class="hosp-card">
+    <div class="hosp-carousel" data-hotel="coral">
+      <button class="hosp-arrow prev" onclick="hospSlide(this,-1)">‹</button>
+      <img src="https://img.cdnpth.com/media/239307/b1995936-dc13-4f77-a8f4-1521e4b0ed64_main.jpg" alt="Coral Club - Exterior y alberca" class="active" loading="lazy">
+      <img src="https://img.cdnpth.com/media/239307/01493908-7a0f-4e29-af66-6e8b92b51ccc.jpg" alt="Coral Club - Instalaciones" loading="lazy">
+      <img src="https://img.cdnpth.com/media/239307/045c6aba-c47b-4e57-a4ef-33446c97067b.jpg" alt="Coral Club - Áreas comunes" loading="lazy">
+      <button class="hosp-arrow next" onclick="hospSlide(this,1)">›</button>
     </div>
-    <p class="loc-addr">Temixco, Morelos</p>
-    <div style="display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:14px">
-      <a href="https://www.expedia.mx/Temixco-Hoteles-Coral-Club.h90927776.Informacion-Del-Hotel?chkin=2026-12-19&chkout=2026-12-20&x_psk=&rm1=a2&locale=es_MX&siteid=11&semcid=&semdtl=" target="_blank" rel="noopener" class="btn btn-olive" style="max-width:280px;display:flex">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Reservar en Expedia
-      </a>
-      <a href="https://maps.app.goo.gl/yAc9xExwUHw3ksWB7" target="_blank" rel="noopener" class="btn btn-olive" style="max-width:280px;display:flex">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Ver en Maps
-      </a>
+    <div class="hosp-dots">
+      <button class="hosp-dot active" onclick="hospGo(this,0)"></button>
+      <button class="hosp-dot" onclick="hospGo(this,1)"></button>
+      <button class="hosp-dot" onclick="hospGo(this,2)"></button>
+    </div>
+    <div class="hosp-info">
+      <h3 class="hosp-name">Coral Club</h3>
+      <p class="hosp-loc">Temixco, Morelos</p>
+      <div class="hosp-btns">
+        <a href="https://www.expedia.mx/Temixco-Hoteles-Coral-Club.h90927776.Informacion-Del-Hotel?chkin=2026-12-19&chkout=2026-12-20&x_psk=&rm1=a2&locale=es_MX&siteid=11&semcid=&semdtl=" target="_blank" rel="noopener" class="hosp-btn">
+          <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M7 7V5a5 5 0 0110 0v2"/><circle cx="12" cy="15" r="2"/></svg>
+          Reservar
+        </a>
+        <a href="https://maps.app.goo.gl/yAc9xExwUHw3ksWB7" target="_blank" rel="noopener" class="hosp-btn">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Cómo llegar
+        </a>
+      </div>
     </div>
   </div>
 
   <!-- Hotel 2: Parador del Rey -->
-  <div class="loc-card hotel-card" style="margin-top:22px">
-    <h3 class="loc-name" style="margin-top:18px">Parador del Rey</h3>
-    <div aria-hidden="true" style="display:flex;justify-content:center;align-items:center;gap:8px;margin:8px auto 6px;color:var(--peach-accent)">
-      <span style="display:block;width:32px;height:1px;background:linear-gradient(to right,transparent,rgba(182,7,176,.55))"></span>
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Hotel">
-        <path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18"/>
-        <rect x="7" y="11" width="2.5" height="2.5" rx=".3"/><rect x="11" y="11" width="2.5" height="2.5" rx=".3"/><rect x="15" y="11" width="2.5" height="2.5" rx=".3"/>
-        <rect x="7" y="15.5" width="2.5" height="2.5" rx=".3"/><rect x="15" y="15.5" width="2.5" height="2.5" rx=".3"/>
-        <path d="M10.5 21v-3.5h3V21"/>
-      </svg>
-      <span style="display:block;width:32px;height:1px;background:linear-gradient(to left,transparent,rgba(182,7,176,.55))"></span>
+  <div class="hosp-card">
+    <div class="hosp-carousel" data-hotel="parador">
+      <button class="hosp-arrow prev" onclick="hospSlide(this,-1)">‹</button>
+      <img src="https://img.cdnpth.com/media/544705/5d0781ce-68c1-4ae9-9365-cb87b4de5b93_main.jpg" alt="Parador del Rey - Fachada" class="active" loading="lazy">
+      <img src="https://img.cdnpth.com/media/544705/f55e916b-f07b-420a-8d4f-6e2dfd598f6c.jpg" alt="Parador del Rey - Instalaciones" loading="lazy">
+      <img src="https://img.cdnpth.com/media/544705/09fb063b-adf8-4cbf-a7d3-ad5df67f3f38.jpg" alt="Parador del Rey - Alberca" loading="lazy">
+      <button class="hosp-arrow next" onclick="hospSlide(this,1)">›</button>
     </div>
-    <p class="loc-addr">Temixco, Morelos</p>
-    <div style="display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:14px">
-      <a href="https://www.expedia.mx/Temixco-Hoteles-Parador-Del-Rey.h90998032.Informacion-Del-Hotel?chkin=2026-12-19&chkout=2026-12-20&x_psk=&rm1=a2&locale=es_MX&siteid=11&semcid=&semdtl=" target="_blank" rel="noopener" class="btn btn-olive" style="max-width:280px;display:flex">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Reservar en Expedia
-      </a>
-      <a href="https://maps.app.goo.gl/n3AQ26KCXw9vxNjC7" target="_blank" rel="noopener" class="btn btn-olive" style="max-width:280px;display:flex">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Ver en Maps
-      </a>
+    <div class="hosp-dots">
+      <button class="hosp-dot active" onclick="hospGo(this,0)"></button>
+      <button class="hosp-dot" onclick="hospGo(this,1)"></button>
+      <button class="hosp-dot" onclick="hospGo(this,2)"></button>
+    </div>
+    <div class="hosp-info">
+      <h3 class="hosp-name">Parador del Rey</h3>
+      <p class="hosp-loc">Temixco, Morelos</p>
+      <div class="hosp-btns">
+        <a href="https://www.expedia.mx/Temixco-Hoteles-Parador-Del-Rey.h90998032.Informacion-Del-Hotel?chkin=2026-12-19&chkout=2026-12-20&x_psk=&rm1=a2&locale=es_MX&siteid=11&semcid=&semdtl=" target="_blank" rel="noopener" class="hosp-btn">
+          <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M7 7V5a5 5 0 0110 0v2"/><circle cx="12" cy="15" r="2"/></svg>
+          Reservar
+        </a>
+        <a href="https://maps.app.goo.gl/n3AQ26KCXw9vxNjC7" target="_blank" rel="noopener" class="hosp-btn">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Cómo llegar
+        </a>
+      </div>
     </div>
   </div>
 
   <!-- Hotel 3: Hotel Villas Cuernavaca -->
-  <div class="loc-card hotel-card" style="margin-top:22px">
-    <h3 class="loc-name" style="margin-top:18px">Hotel Villas Cuernavaca</h3>
-    <div aria-hidden="true" style="display:flex;justify-content:center;align-items:center;gap:8px;margin:8px auto 6px;color:var(--peach-accent)">
-      <span style="display:block;width:32px;height:1px;background:linear-gradient(to right,transparent,rgba(182,7,176,.55))"></span>
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Hotel">
-        <path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18"/>
-        <rect x="7" y="11" width="2.5" height="2.5" rx=".3"/><rect x="11" y="11" width="2.5" height="2.5" rx=".3"/><rect x="15" y="11" width="2.5" height="2.5" rx=".3"/>
-        <rect x="7" y="15.5" width="2.5" height="2.5" rx=".3"/><rect x="15" y="15.5" width="2.5" height="2.5" rx=".3"/>
-        <path d="M10.5 21v-3.5h3V21"/>
-      </svg>
-      <span style="display:block;width:32px;height:1px;background:linear-gradient(to left,transparent,rgba(182,7,176,.55))"></span>
+  <div class="hosp-card">
+    <div class="hosp-carousel" data-hotel="villas">
+      <button class="hosp-arrow prev" onclick="hospSlide(this,-1)">‹</button>
+      <img src="https://img.cdnpth.com/media/544705/b41edefd-7f35-4cf9-8688-0723e1a10fa0.jpg" alt="Hotel Villas Cuernavaca - Vista" class="active" loading="lazy">
+      <img src="https://img.cdnpth.com/media/544705/46da8814-d1fd-415a-a886-9c7111cc9835.jpg" alt="Hotel Villas Cuernavaca - Alberca" loading="lazy">
+      <img src="https://img.cdnpth.com/media/544705/3a526e85-3176-486f-a2ae-5c5fcaf40281.jpg" alt="Hotel Villas Cuernavaca - Habitación" loading="lazy">
+      <button class="hosp-arrow next" onclick="hospSlide(this,1)">›</button>
     </div>
-    <p class="loc-addr">Cuernavaca, Morelos</p>
-    <div style="display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:14px">
-      <a href="https://www.expedia.mx/Cuernavaca-Hoteles-Hotel-Villas-Cuernavaca.h3032710.Informacion-Del-Hotel?chkin=2026-12-19&chkout=2026-12-20&x_psk=&rm1=a2&locale=es_MX&siteid=11&semcid=&semdtl=" target="_blank" rel="noopener" class="btn btn-olive" style="max-width:280px;display:flex">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Reservar en Expedia
-      </a>
-      <a href="https://maps.app.goo.gl/2X3UT5zEUaFkAT3h7" target="_blank" rel="noopener" class="btn btn-olive" style="max-width:280px;display:flex">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Ver en Maps
-      </a>
+    <div class="hosp-dots">
+      <button class="hosp-dot active" onclick="hospGo(this,0)"></button>
+      <button class="hosp-dot" onclick="hospGo(this,1)"></button>
+      <button class="hosp-dot" onclick="hospGo(this,2)"></button>
+    </div>
+    <div class="hosp-info">
+      <h3 class="hosp-name">Hotel Villas Cuernavaca</h3>
+      <p class="hosp-loc">Cuernavaca, Morelos</p>
+      <div class="hosp-btns">
+        <a href="https://www.expedia.mx/Cuernavaca-Hoteles-Hotel-Villas-Cuernavaca.h3032710.Informacion-Del-Hotel?chkin=2026-12-19&chkout=2026-12-20&x_psk=&rm1=a2&locale=es_MX&siteid=11&semcid=&semdtl=" target="_blank" rel="noopener" class="hosp-btn">
+          <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M7 7V5a5 5 0 0110 0v2"/><circle cx="12" cy="15" r="2"/></svg>
+          Reservar
+        </a>
+        <a href="https://maps.app.goo.gl/2X3UT5zEUaFkAT3h7" target="_blank" rel="noopener" class="hosp-btn">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Cómo llegar
+        </a>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+function hospSlide(btn,dir){
+  const carousel=btn.closest('.hosp-carousel');
+  const imgs=carousel.querySelectorAll('img');
+  const dots=carousel.parentElement.querySelector('.hosp-dots').querySelectorAll('.hosp-dot');
+  let cur=Array.from(imgs).findIndex(i=>i.classList.contains('active'));
+  imgs[cur].classList.remove('active');
+  dots[cur].classList.remove('active');
+  cur=(cur+dir+imgs.length)%imgs.length;
+  imgs[cur].classList.add('active');
+  dots[cur].classList.add('active');
+}
+function hospGo(dot,idx){
+  const card=dot.closest('.hosp-card');
+  const imgs=card.querySelector('.hosp-carousel').querySelectorAll('img');
+  const dots=card.querySelector('.hosp-dots').querySelectorAll('.hosp-dot');
+  imgs.forEach((i,n)=>{i.classList.toggle('active',n===idx)});
+  dots.forEach((d,n)=>{d.classList.toggle('active',n===idx)});
+}
+document.querySelectorAll('.hosp-carousel').forEach(c=>{
+  let t=setInterval(()=>{const n=c.querySelector('.hosp-arrow.next');if(n)hospSlide(n,1)},4000);
+  c.addEventListener('pointerenter',()=>clearInterval(t));
+  c.addEventListener('pointerleave',()=>{t=setInterval(()=>{const n=c.querySelector('.hosp-arrow.next');if(n)hospSlide(n,1)},4000)});
+});
+</script>
 
 
 <!-- ═══════════════ 12. RSVP ═════════════════════════ -->
