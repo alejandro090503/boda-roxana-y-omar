@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#f3eaf5">
   <title>Margarita &amp; Cristhian · 19 · Diciembre · 2026</title>
   <meta name="description" content="Nos casamos. Acompáñanos el 19 de diciembre de 2026 en Temixco, Morelos. Con todo nuestro amor, Margarita & Cristhian.">
@@ -35,12 +35,12 @@
 
 /* ── RESET ────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
 body{
   background:var(--ink);color:var(--cream);
   font-family:'Lato',sans-serif;font-weight:500;
   font-size:16px;line-height:1.6;
-  overflow-x:hidden;max-width:430px;margin:0 auto;
+  overflow-x:clip;max-width:430px;margin:0 auto;
   -webkit-tap-highlight-color:transparent;
 }
 section{padding:64px 22px}
@@ -1424,7 +1424,7 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
     0 12px 40px rgba(0,0,0,.35),
     0 0 0 1px rgba(182,7,176,.3);
 }
-.alb-qr{width:260px;height:260px;display:block;border-radius:4px}
+.alb-qr{width:100%;max-width:260px;height:auto;aspect-ratio:1;display:block;border-radius:4px}
 .alb-scan{margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--peach);opacity:.75}
 .alb-btn{max-width:310px;margin:0 auto;display:flex}
 .alb-hint{text-align:center;font-size:11px;color:var(--cream);opacity:.42;line-height:1.7;margin-top:22px}
@@ -1923,7 +1923,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   .gf-card{padding:16px}
 
   /* Album */
-  .alb-qr-frame{width:140px;height:140px}
+  .alb-qr-frame{width:auto;max-width:180px;height:auto}
 
   /* Gallery */
   #gallery{padding:48px 12px;overflow:hidden}
@@ -1966,7 +1966,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 }
 
 /* Prevent horizontal overflow globally */
-section,#footer,.container{max-width:100%;overflow-x:hidden}
+section,#footer,.container{max-width:100%;overflow-x:clip}
   </style>
 </head>
 <body>
@@ -2807,24 +2807,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const ldHint  = document.querySelector('.ld-hint');
   let opened    = false;
 
+  let booted = false;
   function fadeLoaderAndBoot(){
-    // Mismo fadeout + onComplete que el loader original
+    if (booted) return;
+    booted = true;
     gsap.to('#loader', {
       opacity: 0, duration: .7, ease: 'power2.out',
       onComplete() {
-        document.getElementById('loader').remove();
-        addSectionWaves();
-        addSectionMedals();
-        addCorners();
-        addWindOrns();
-        addAuras();
-        heroAnim();
-        spawnParticles();
-        scrollAnims();
-        countdown();
-        setInterval(countdown, 1000);
-        ambientWind();
-        initGallery();
+        const ld = document.getElementById('loader');
+        if (ld) ld.style.display = 'none';
+        try { addSectionWaves(); } catch(e) { console.warn('waves', e); }
+        try { addSectionMedals(); } catch(e) { console.warn('medals', e); }
+        try { addCorners(); } catch(e) { console.warn('corners', e); }
+        try { addWindOrns(); } catch(e) { console.warn('wind', e); }
+        try { addAuras(); } catch(e) { console.warn('auras', e); }
+        try { heroAnim(); } catch(e) { console.warn('hero', e); }
+        try { spawnParticles(); } catch(e) { console.warn('particles', e); }
+        try { scrollAnims(); } catch(e) { console.warn('scrollAnims', e); }
+        try { countdown(); setInterval(countdown, 1000); } catch(e) { console.warn('countdown', e); }
+        try { ambientWind(); } catch(e) { console.warn('wind', e); }
+        try { initGallery(); } catch(e) { console.warn('gallery', e); }
+        setTimeout(() => ScrollTrigger.refresh(), 300);
       }
     });
   }
@@ -2861,21 +2864,19 @@ window.addEventListener('scroll', () => {
 
 /* ── HERO ANIMATIONS ─────────────────────────────────── */
 function heroAnim() {
-  // Set initial states
-  gsap.set(['#hDate','#hScroll'], { opacity: 0 });
-  gsap.set('#hNamesArch', { opacity: 0, y: 16 });
+  // Nombres apilados sobre la foto + hint de scroll (estructura rediseñada)
+  const names = gsap.utils.toArray('.h-names-stack .h-name, .h-names-stack .h-amp');
+  const scroll = document.getElementById('hScroll');
+
+  if (names.length) gsap.set(names, { opacity: 0, y: 16 });
+  if (scroll)       gsap.set(scroll, { opacity: 0 });
 
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  tl
-    .to('#hNamesArch', { opacity: 1, y: 0, duration: 1.1 }, .2)
-    .to('#hDate',      { opacity: 1, duration: .7 }, 1.0)
-    .to('#hScroll',    { opacity: 1, duration: .5 }, 1.6);
+  if (names.length) tl.to(names, { opacity: 1, y: 0, duration: 1.0, stagger: .14 }, .2);
+  if (scroll)       tl.to(scroll, { opacity: 1, duration: .5 }, '>-.2');
 
-  // Hero parallax
-  gsap.to('#heroBg', {
-    yPercent: 22, ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
+  // El fondo conserva su Ken Burns CSS; no se aplica parallax para evitar
+  // huecos en .h-bg (inset:0) ni pisar el transform del <img>.
 }
 
 /* ── PARTÍCULAS GLOBALES · FLOTANTES DORADO+ROSA · TODO EL DOC ── */
@@ -3072,48 +3073,50 @@ function buildTimelinePath() {
 /* ── SCROLL ANIMATIONS ───────────────────────────────── */
 function scrollAnims() {
   const ease = 'power3.out';
-  const IR = { immediateRender: false };
 
   // Generic section titles
   document.querySelectorAll('section').forEach(sec => {
     const els = sec.querySelectorAll('.lbl,.ttl,.gline');
     if (els.length) {
-      gsap.from(els, {
-        opacity: 0, y: 22, duration: .7, stagger: .1, ease, ...IR,
-        scrollTrigger: { trigger: sec, start: 'top 88%', once: true }
-      });
+      gsap.fromTo(els,
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: .7, stagger: .1, ease,
+          scrollTrigger: { trigger: sec, start: 'top 88%', once: true }
+        });
     }
   });
 
   // Verse block
-  gsap.from('.verse-frame', {
-    opacity: 0, y: 30, scale: .97, duration: .9, ease: 'power4.out', ...IR,
-    scrollTrigger: { trigger: '#verseStart', start: 'top 82%', once: true }
-  });
-  gsap.from('.verse-orn', {
-    opacity: 0, scaleX: 0, duration: .8, ease, ...IR,
-    scrollTrigger: { trigger: '#verseStart', start: 'top 82%', once: true }
-  });
-  gsap.from(['.verse-quote-mark','.verse-text','.verse-divider','.verse-attribution'], {
-    opacity: 0, y: 16, duration: .6, stagger: .12, ease, ...IR,
-    scrollTrigger: { trigger: '.verse-frame', start: 'top 80%', once: true }
-  });
+  gsap.fromTo('.verse-frame',
+    { opacity: 0, y: 30, scale: .97 },
+    { opacity: 1, y: 0, scale: 1, duration: .9, ease: 'power4.out',
+      scrollTrigger: { trigger: '#verseStart', start: 'top 82%', once: true }
+    });
+  gsap.fromTo('.verse-orn',
+    { opacity: 0, scaleX: 0 },
+    { opacity: 1, scaleX: 1, duration: .8, ease,
+      scrollTrigger: { trigger: '#verseStart', start: 'top 82%', once: true }
+    });
+  gsap.fromTo(['.verse-quote-mark','.verse-text','.verse-divider','.verse-attribution'],
+    { opacity: 0, y: 16 },
+    { opacity: 1, y: 0, duration: .6, stagger: .12, ease,
+      scrollTrigger: { trigger: '.verse-frame', start: 'top 80%', once: true }
+    });
 
   // Countdown rings
-  gsap.from('.cd-ring-item', {
-    opacity: 0, y: 22,
-    duration: .65, stagger: .11,
-    ease, ...IR,
-    scrollTrigger: { trigger: '#countdown', start: 'top 85%', once: true }
-  });
+  gsap.fromTo('.cd-ring-item',
+    { opacity: 0, y: 22 },
+    { opacity: 1, y: 0, duration: .65, stagger: .11, ease,
+      scrollTrigger: { trigger: '#countdown', start: 'top 85%', once: true }
+    });
 
   // Location cards
   ScrollTrigger.create({
     trigger: '#location', start: 'top 78%', once: true,
     onEnter() {
-      gsap.from('.loc-card', {
-        opacity: 0, y: 36, duration: .75, stagger: .14, ease, ...IR
-      });
+      gsap.fromTo('.loc-card',
+        { opacity: 0, y: 36 },
+        { opacity: 1, y: 0, duration: .75, stagger: .14, ease });
       document.querySelectorAll('.loc-card').forEach((c, i) => {
         setTimeout(() => c.classList.add('on'), 420 + i * 220);
       });
@@ -3121,11 +3124,12 @@ function scrollAnims() {
   });
 
   // Calendar
-  gsap.from(['#calendar .cal-sub', '#calBtn'], {
-    opacity: 0, y: 18, scale: .96, duration: .65, stagger: .14,
-    ease: 'back.out(1.3)', ...IR,
-    scrollTrigger: { trigger: '#calendar', start: 'top 90%', once: true }
-  });
+  gsap.fromTo(['#calendar .cal-sub', '#calBtn'],
+    { opacity: 0, y: 18, scale: .96 },
+    { opacity: 1, y: 0, scale: 1, duration: .65, stagger: .14,
+      ease: 'back.out(1.3)',
+      scrollTrigger: { trigger: '#calendar', start: 'top 90%', once: true }
+    });
 
   // Timeline
   buildTimelinePath();
@@ -3145,66 +3149,79 @@ function scrollAnims() {
   });
 
   // Dress code
-  gsap.from('.dc-sub', {
-    opacity: 0, y: 18, duration: .65, ease, ...IR,
-    scrollTrigger: { trigger: '#dresscode', start: 'top 82%', once: true }
-  });
-  gsap.set('.pal-sw', { scale: 0 });
-  ScrollTrigger.create({
-    trigger: '#palette', start: 'top 86%', once: true,
-    onEnter() {
-      gsap.to('.pal-sw', { scale: 1, duration: .55, stagger: .09, ease: 'back.out(2.2)' });
-      gsap.from('#dcNote', { opacity: 0, x: -18, duration: .65, delay: .45, ease, ...IR });
-    }
-  });
+  gsap.fromTo('.dc-sub',
+    { opacity: 0, y: 18 },
+    { opacity: 1, y: 0, duration: .65, ease,
+      scrollTrigger: { trigger: '#dresscode', start: 'top 82%', once: true }
+    });
+  // Figuras (caballero/dama) + notas (estructura rediseñada)
+  gsap.fromTo('.dc-figures-wrap > div',
+    { opacity: 0, y: 24 },
+    { opacity: 1, y: 0, duration: .7, stagger: .14, ease: 'back.out(1.4)',
+      scrollTrigger: { trigger: '#dresscode', start: 'top 78%', once: true }
+    });
+  gsap.fromTo(['#dcKids', '#dcPunct'],
+    { opacity: 0, x: -18 },
+    { opacity: 1, x: 0, duration: .65, stagger: .12, ease,
+      scrollTrigger: { trigger: '#dcKids', start: 'top 88%', once: true }
+    });
 
   // Family
-  gsap.from('.fam-ttl', {
-    opacity: 0, y: 18, duration: .6, stagger: .2, ease, ...IR,
-    scrollTrigger: { trigger: '#family', start: 'top 78%', once: true }
-  });
-  gsap.from('.fam-card', {
-    opacity: 0, y: 20, duration: .55, stagger: .08, ease, ...IR,
-    scrollTrigger: { trigger: '#family', start: 'top 78%', once: true }
-  });
+  gsap.fromTo('.fam-ttl',
+    { opacity: 0, y: 18 },
+    { opacity: 1, y: 0, duration: .6, stagger: .2, ease,
+      scrollTrigger: { trigger: '#family', start: 'top 78%', once: true }
+    });
+  gsap.fromTo('.fam-card',
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: .55, stagger: .08, ease,
+      scrollTrigger: { trigger: '#family', start: 'top 78%', once: true }
+    });
 
   // Gifts
-  gsap.from('.gf-card', {
-    opacity: 0, y: 22, duration: .6, stagger: .11, ease, ...IR,
-    scrollTrigger: { trigger: '#gifts', start: 'top 80%', once: true }
-  });
+  gsap.fromTo('.gf-card',
+    { opacity: 0, y: 22 },
+    { opacity: 1, y: 0, duration: .6, stagger: .11, ease,
+      scrollTrigger: { trigger: '#gifts', start: 'top 80%', once: true }
+    });
 
   // Album
-  gsap.from('.alb-qr-frame', {
-    opacity: 0, scale: .86, duration: .75, ease: 'back.out(1.4)', ...IR,
-    scrollTrigger: { trigger: '#album', start: 'top 80%', once: true }
-  });
-  gsap.from(['.alb-sub','.alb-scan','.alb-btn','.alb-hint'], {
-    opacity: 0, y: 18, duration: .6, stagger: .1, ease, ...IR,
-    scrollTrigger: { trigger: '#album', start: 'top 80%', once: true }
-  });
+  gsap.fromTo('.alb-qr-frame',
+    { opacity: 0, scale: .86 },
+    { opacity: 1, scale: 1, duration: .75, ease: 'back.out(1.4)',
+      scrollTrigger: { trigger: '#album', start: 'top 80%', once: true }
+    });
+  gsap.fromTo(['.alb-sub','.alb-scan','.alb-btn','.alb-hint'],
+    { opacity: 0, y: 18 },
+    { opacity: 1, y: 0, duration: .6, stagger: .1, ease,
+      scrollTrigger: { trigger: '#album', start: 'top 80%', once: true }
+    });
 
   // Gallery
-  gsap.from('.gal-sub', {
-    opacity: 0, y: 16, duration: .6, ease, ...IR,
-    scrollTrigger: { trigger: '#gallery', start: 'top 85%', once: true }
-  });
-  gsap.from('.gal-hint', {
-    opacity: 0, y: 12, duration: .5, delay: .6, ease, ...IR,
-    scrollTrigger: { trigger: '#gallery', start: 'top 80%', once: true }
-  });
+  gsap.fromTo('.gal-sub',
+    { opacity: 0, y: 16 },
+    { opacity: 1, y: 0, duration: .6, ease,
+      scrollTrigger: { trigger: '#gallery', start: 'top 85%', once: true }
+    });
+  gsap.fromTo('.gal-hint',
+    { opacity: 0, y: 12 },
+    { opacity: 1, y: 0, duration: .5, delay: .6, ease,
+      scrollTrigger: { trigger: '#gallery', start: 'top 80%', once: true }
+    });
 
   // Hospedaje
-  gsap.from('.hosp-card', {
-    opacity: 0, y: 34, scale: .96, duration: .7, stagger: .18, ease: 'power4.out', ...IR,
-    scrollTrigger: { trigger: '#lodging', start: 'top 80%', once: true }
-  });
+  gsap.fromTo('.hosp-card',
+    { opacity: 0, y: 34, scale: .96 },
+    { opacity: 1, y: 0, scale: 1, duration: .7, stagger: .18, ease: 'power4.out',
+      scrollTrigger: { trigger: '#lodging', start: 'top 80%', once: true }
+    });
 
   // Sobre interactivo
-  gsap.from('.env-interactive', {
-    opacity: 0, y: 20, duration: .7, ease, ...IR,
-    scrollTrigger: { trigger: '.env-interactive', start: 'top 85%', once: true }
-  });
+  gsap.fromTo('.env-interactive',
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: .7, ease,
+      scrollTrigger: { trigger: '.env-interactive', start: 'top 85%', once: true }
+    });
 
   // RSVP card
   gsap.fromTo('.rsvp-card',{opacity:0,y:40,scale:.97},{opacity:1,y:0,scale:1,duration:1.2,ease:'power4.out',scrollTrigger:{trigger:'.rsvp-card',start:'top 82%',once:true}});
@@ -3214,14 +3231,15 @@ function scrollAnims() {
   gsap.fromTo('.rsvp-deadline',{opacity:0,letterSpacing:'1em'},{opacity:1,letterSpacing:'.4em',duration:1,scrollTrigger:{trigger:'.rsvp-deadline',start:'top 92%',once:true}});
 
   // Footer
-  gsap.from('#footer > *', {
-    opacity: 0, y: 20, duration: .6, stagger: .1, ease, ...IR,
-    scrollTrigger: { trigger: '#footer', start: 'top 90%', once: true }
-  });
+  gsap.fromTo('#footer > *',
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: .6, stagger: .1, ease,
+      scrollTrigger: { trigger: '#footer', start: 'top 90%', once: true }
+    });
 }
 
 /* ── COUNTDOWN ───────────────────────────────────────── */
-const WED = new Date('2026-12-19T11:00:00');
+const WED = new Date('2026-12-19T11:00:00-06:00');
 let prevS = '';
 const RING_C = 2 * Math.PI * 52;  // 326.73
 function pad(n) { return String(n).padStart(2,'0'); }
@@ -3270,7 +3288,7 @@ document.querySelectorAll('input[name="att"]').forEach(r => {
     const g = document.getElementById('fg3');
     if (e.target.value === 'yes') {
       g.style.display = 'block';
-      gsap.from(g, { opacity: 0, y: 10, duration: .35, ease: 'power2.out' });
+      gsap.fromTo(g, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .35, ease: 'power2.out' });
     } else {
       g.style.display = 'none';
     }
@@ -3506,7 +3524,7 @@ function addSectionMedals() {
     m.className = 'sec-medal';
     m.innerHTML = `<span>${map[id]}</span>`;
     gsap.set(m, { opacity: 0, scale: .7 });
-    sec.insertBefore(m, lbl);
+    lbl.parentNode.insertBefore(m, lbl);
     ScrollTrigger.create({
       trigger: sec, start: 'top 86%', once: true,
       onEnter() {
@@ -3545,7 +3563,7 @@ function addWindOrns() {
     orn.className = 'wind-orn';
     orn.textContent = '✦';
     gsap.set(orn, { opacity: 0 });
-    sec.insertBefore(orn, lbl);
+    lbl.parentNode.insertBefore(orn, lbl);
     ScrollTrigger.create({
       trigger: sec, start: 'top 88%', once: true,
       onEnter() { gsap.to(orn, { opacity: 1, duration: 1.2, ease: 'power2.out' }); }
@@ -3639,6 +3657,46 @@ function initWheel() {
     tl.to(wheel, {rotation:360, ease:'none'}, 0);
     tl.to(items,  {rotation:-360, ease:'none'}, 0);
   }
+
+  // Touch/drag spin
+  let angle = 0, startY = 0, dragging = false, velocity = 0, lastY = 0, lastT = 0, rafId = 0;
+  function onStart(e) {
+    dragging = true; velocity = 0;
+    const pt = e.touches ? e.touches[0] : e;
+    startY = lastY = pt.clientY; lastT = Date.now();
+    cancelAnimationFrame(rafId);
+  }
+  function onMove(e) {
+    if (!dragging) return;
+    const pt = e.touches ? e.touches[0] : e;
+    const dy = pt.clientY - lastY;
+    const now = Date.now();
+    const dt = now - lastT || 1;
+    velocity = dy / dt;
+    angle += dy * 0.4;
+    gsap.set(wheel, { rotation: angle });
+    gsap.set(items, { rotation: -angle });
+    lastY = pt.clientY; lastT = now;
+  }
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    function coast() {
+      if (Math.abs(velocity) < 0.01) return;
+      velocity *= 0.95;
+      angle += velocity * 16 * 0.4;
+      gsap.set(wheel, { rotation: angle });
+      gsap.set(items, { rotation: -angle });
+      rafId = requestAnimationFrame(coast);
+    }
+    coast();
+  }
+  wheel.addEventListener('touchstart', onStart, { passive: true });
+  wheel.addEventListener('touchmove', onMove, { passive: true });
+  wheel.addEventListener('touchend', onEnd);
+  wheel.addEventListener('mousedown', onStart);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onEnd);
 }
 
 function initGalLightbox() {
