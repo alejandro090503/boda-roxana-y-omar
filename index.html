@@ -35,7 +35,7 @@
 
 /* ── RESET ────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{
   background:var(--ink);color:var(--cream);
   font-family:'Lato',sans-serif;font-weight:500;
@@ -103,7 +103,7 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
 .hotel-card{padding-top:18px}
 .hotel-gallery{
   display:flex;flex-direction:column;gap:8px;
-  margin:0 -6px 6px;
+  margin:0 0 6px;
 }
 .hotel-photo{
   position:relative;overflow:hidden;
@@ -146,7 +146,7 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
 /* ── PARTÍCULAS GLOBALES ──────────────────────────────── */
 #globalParticles{
   position:fixed;inset:0;
-  width:100vw;height:100vh;
+  width:100%;height:100%;
   z-index:50;
   pointer-events:none;
   overflow:hidden;
@@ -1145,7 +1145,7 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
   padding:60px 0 80px;
   background:linear-gradient(180deg,var(--ink) 0%,var(--ink3) 100%);
   text-align:center;
-  overflow:visible;
+  overflow:hidden;
   position:relative;
 }
 #gallery > .lbl,#gallery > .ttl,#gallery > .gline,#gallery > .gal-sub,#gallery > .sec-medal{padding-left:22px;padding-right:22px}
@@ -1167,7 +1167,7 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
   margin:30px auto 0;
   padding:clamp(18px,4vw,40px);
   display:flex;align-items:center;justify-content:center;
-  overflow:visible;
+  overflow:hidden;
 }
 .wheel-stage::before{
   content:"";position:absolute;inset:0;
@@ -1885,6 +1885,88 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   letter-spacing:4.5px;text-transform:uppercase;
   color:var(--peach-accent);
 }
+
+/* ── MOBILE RESPONSIVENESS ───────────────────────────── */
+@media (max-width:430px){
+  section{padding:48px 18px}
+  .ttl{font-size:26px}
+  .lbl{font-size:11px;letter-spacing:3px}
+
+  /* Hero */
+  #hero{padding:24px 16px 70px}
+  .h-names{font-size:clamp(42px,12vw,56px)}
+  .h-date-line{font-size:clamp(11px,3vw,13px);letter-spacing:clamp(3px,1vw,5px)}
+
+  /* Verse */
+  .verse-block{padding:48px 16px 52px}
+  .verse-frame{padding:26px 18px 22px}
+  .verse-text{font-size:17px;line-height:1.65}
+  .verse-quote-mark{font-size:50px}
+
+  /* Countdown */
+  #countdown{padding:52px 14px 60px}
+  .cd-ring-grid{gap:6px;margin-top:28px}
+  .cd-ring-item{padding:16px 4px 14px}
+
+  /* Location */
+  .loc-card{margin-left:0;margin-right:0}
+  .loc-addr{font-size:14px}
+
+  /* Calendar */
+  .cal-sub{font-size:14px}
+
+  /* Timeline */
+  .tl-ev{font-size:14px}
+  .tl-de{font-size:13px}
+
+  /* Gifts */
+  .gf-card{padding:16px}
+
+  /* Album */
+  .alb-qr-frame{width:140px;height:140px}
+
+  /* Gallery */
+  #gallery{padding:48px 12px;overflow:hidden}
+  .wheel-stage{height:min(520px,100vw)}
+  .wheel{width:min(400px,82vw);height:min(400px,82vw)}
+  .wheel-item{width:clamp(68px,17vw,110px);height:clamp(90px,22vw,146px);
+    margin-left:calc(clamp(68px,17vw,110px) / -2);
+    margin-top:calc(clamp(90px,22vw,146px) / -2)}
+  .wheel-hub{width:clamp(66px,14vw,96px);height:clamp(66px,14vw,96px)}
+
+  /* Hospedaje */
+  .hosp-card{width:96%;max-width:360px}
+  .hosp-carousel{height:180px}
+  .hosp-name{font-size:20px}
+  .hosp-btn{padding:8px 14px;font-size:12.5px}
+
+  /* RSVP */
+  .rsvp-card{padding:28px 16px 24px}
+  .rsvp-title{font-size:22px}
+
+  /* Footer */
+  #footer{padding:40px 16px 32px}
+}
+
+@media (max-width:340px){
+  .ttl{font-size:22px}
+  #countdown .cd-num{font-size:30px}
+  .cd-ring-lbl{font-size:7px;letter-spacing:1.5px}
+  .cd-ring-grid{gap:4px}
+  .cd-ring-item{padding:12px 2px 10px}
+  .wheel-stage{height:min(440px,95vw)}
+  .wheel{width:min(320px,80vw);height:min(320px,80vw)}
+  .wheel-item{width:clamp(54px,15vw,86px);height:clamp(72px,20vw,114px);
+    margin-left:calc(clamp(54px,15vw,86px) / -2);
+    margin-top:calc(clamp(72px,20vw,114px) / -2)}
+  .hosp-carousel{height:150px}
+  .verse-text{font-size:15px}
+  .rsvp-title{font-size:19px}
+  .hosp-btn{padding:7px 10px;font-size:11.5px}
+}
+
+/* Prevent horizontal overflow globally */
+section,#footer,.container{max-width:100%;overflow-x:hidden}
   </style>
 </head>
 <body>
@@ -2990,32 +3072,47 @@ function buildTimelinePath() {
 /* ── SCROLL ANIMATIONS ───────────────────────────────── */
 function scrollAnims() {
   const ease = 'power3.out';
+  const IR = { immediateRender: false };
 
   // Generic section titles
   document.querySelectorAll('section').forEach(sec => {
     const els = sec.querySelectorAll('.lbl,.ttl,.gline');
     if (els.length) {
       gsap.from(els, {
-        opacity: 0, y: 22, duration: .7, stagger: .1, ease,
+        opacity: 0, y: 22, duration: .7, stagger: .1, ease, ...IR,
         scrollTrigger: { trigger: sec, start: 'top 88%', once: true }
       });
     }
   });
 
-  // Countdown rings — entrada suave (sin scale, evita que queden encogidos)
+  // Verse block
+  gsap.from('.verse-frame', {
+    opacity: 0, y: 30, scale: .97, duration: .9, ease: 'power4.out', ...IR,
+    scrollTrigger: { trigger: '#verseStart', start: 'top 82%', once: true }
+  });
+  gsap.from('.verse-orn', {
+    opacity: 0, scaleX: 0, duration: .8, ease, ...IR,
+    scrollTrigger: { trigger: '#verseStart', start: 'top 82%', once: true }
+  });
+  gsap.from(['.verse-quote-mark','.verse-text','.verse-divider','.verse-attribution'], {
+    opacity: 0, y: 16, duration: .6, stagger: .12, ease, ...IR,
+    scrollTrigger: { trigger: '.verse-frame', start: 'top 80%', once: true }
+  });
+
+  // Countdown rings
   gsap.from('.cd-ring-item', {
     opacity: 0, y: 22,
     duration: .65, stagger: .11,
-    ease: 'power3.out',
+    ease, ...IR,
     scrollTrigger: { trigger: '#countdown', start: 'top 85%', once: true }
   });
 
-  // Location cards — entrada + dibujo del arc del medallón
+  // Location cards
   ScrollTrigger.create({
     trigger: '#location', start: 'top 78%', once: true,
     onEnter() {
       gsap.from('.loc-card', {
-        opacity: 0, y: 36, duration: .75, stagger: .14, ease
+        opacity: 0, y: 36, duration: .75, stagger: .14, ease, ...IR
       });
       document.querySelectorAll('.loc-card').forEach((c, i) => {
         setTimeout(() => c.classList.add('on'), 420 + i * 220);
@@ -3023,15 +3120,14 @@ function scrollAnims() {
     }
   });
 
-  // Calendar button — immediateRender:false evita que quede oculto si scrollTrigger no se dispara
+  // Calendar
   gsap.from(['#calendar .cal-sub', '#calBtn'], {
     opacity: 0, y: 18, scale: .96, duration: .65, stagger: .14,
-    ease: 'back.out(1.3)',
-    immediateRender: false,
+    ease: 'back.out(1.3)', ...IR,
     scrollTrigger: { trigger: '#calendar', start: 'top 90%', once: true }
   });
 
-  // Timeline — camino en S que se dibuja al hacer scroll
+  // Timeline
   buildTimelinePath();
   ScrollTrigger.create({
     trigger: '#itinerary',
@@ -3050,7 +3146,7 @@ function scrollAnims() {
 
   // Dress code
   gsap.from('.dc-sub', {
-    opacity: 0, y: 18, duration: .65, ease,
+    opacity: 0, y: 18, duration: .65, ease, ...IR,
     scrollTrigger: { trigger: '#dresscode', start: 'top 82%', once: true }
   });
   gsap.set('.pal-sw', { scale: 0 });
@@ -3058,37 +3154,57 @@ function scrollAnims() {
     trigger: '#palette', start: 'top 86%', once: true,
     onEnter() {
       gsap.to('.pal-sw', { scale: 1, duration: .55, stagger: .09, ease: 'back.out(2.2)' });
-      gsap.from('#dcNote', { opacity: 0, x: -18, duration: .65, delay: .45, ease });
+      gsap.from('#dcNote', { opacity: 0, x: -18, duration: .65, delay: .45, ease, ...IR });
     }
   });
 
   // Family
   gsap.from('.fam-ttl', {
-    opacity: 0, y: 18, duration: .6, stagger: .2, ease,
+    opacity: 0, y: 18, duration: .6, stagger: .2, ease, ...IR,
     scrollTrigger: { trigger: '#family', start: 'top 78%', once: true }
   });
   gsap.from('.fam-card', {
-    opacity: 0, y: 20, duration: .55, stagger: .08, ease,
+    opacity: 0, y: 20, duration: .55, stagger: .08, ease, ...IR,
     scrollTrigger: { trigger: '#family', start: 'top 78%', once: true }
   });
 
   // Gifts
   gsap.from('.gf-card', {
-    opacity: 0, y: 22, duration: .6, stagger: .11, ease,
+    opacity: 0, y: 22, duration: .6, stagger: .11, ease, ...IR,
     scrollTrigger: { trigger: '#gifts', start: 'top 80%', once: true }
   });
 
   // Album
   gsap.from('.alb-qr-frame', {
-    opacity: 0, scale: .86, duration: .75, ease: 'back.out(1.4)',
+    opacity: 0, scale: .86, duration: .75, ease: 'back.out(1.4)', ...IR,
     scrollTrigger: { trigger: '#album', start: 'top 80%', once: true }
   });
   gsap.from(['.alb-sub','.alb-scan','.alb-btn','.alb-hint'], {
-    opacity: 0, y: 18, duration: .6, stagger: .1, ease,
+    opacity: 0, y: 18, duration: .6, stagger: .1, ease, ...IR,
     scrollTrigger: { trigger: '#album', start: 'top 80%', once: true }
   });
 
-  // Gallery — fotos que caen (initGallery se llama al final)
+  // Gallery
+  gsap.from('.gal-sub', {
+    opacity: 0, y: 16, duration: .6, ease, ...IR,
+    scrollTrigger: { trigger: '#gallery', start: 'top 85%', once: true }
+  });
+  gsap.from('.gal-hint', {
+    opacity: 0, y: 12, duration: .5, delay: .6, ease, ...IR,
+    scrollTrigger: { trigger: '#gallery', start: 'top 80%', once: true }
+  });
+
+  // Hospedaje
+  gsap.from('.hosp-card', {
+    opacity: 0, y: 34, scale: .96, duration: .7, stagger: .18, ease: 'power4.out', ...IR,
+    scrollTrigger: { trigger: '#lodging', start: 'top 80%', once: true }
+  });
+
+  // Sobre interactivo
+  gsap.from('.env-interactive', {
+    opacity: 0, y: 20, duration: .7, ease, ...IR,
+    scrollTrigger: { trigger: '.env-interactive', start: 'top 85%', once: true }
+  });
 
   // RSVP card
   gsap.fromTo('.rsvp-card',{opacity:0,y:40,scale:.97},{opacity:1,y:0,scale:1,duration:1.2,ease:'power4.out',scrollTrigger:{trigger:'.rsvp-card',start:'top 82%',once:true}});
@@ -3099,7 +3215,7 @@ function scrollAnims() {
 
   // Footer
   gsap.from('#footer > *', {
-    opacity: 0, y: 20, duration: .6, stagger: .1, ease,
+    opacity: 0, y: 20, duration: .6, stagger: .1, ease, ...IR,
     scrollTrigger: { trigger: '#footer', start: 'top 90%', once: true }
   });
 }
