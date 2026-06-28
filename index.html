@@ -641,6 +641,27 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
 }
 .loc-map-wrap iframe{display:block;width:100%;height:210px;border:0}
 
+/* ── Marco editorial para foto del lugar (iglesia / salón) ── */
+.loc-photo-frame{
+  position:relative;width:calc(100% - 34px);max-width:430px;
+  margin:6px auto 22px;padding:11px;
+  background:linear-gradient(155deg,#ffffff,var(--ink3));
+  border-radius:3px;box-shadow:0 12px 32px rgba(42,30,48,.16);
+}
+.loc-photo-frame::before{
+  content:"";position:absolute;inset:6px;
+  border:1px solid rgba(182,7,176,.4);pointer-events:none;z-index:2;
+}
+.loc-photo-frame img{
+  display:block;width:100%;height:230px;object-fit:cover;
+}
+.loc-photo-frame .lpc{position:absolute;width:15px;height:15px;border:1.5px solid var(--peach);z-index:3}
+.loc-photo-frame .lpc.tl{top:3px;left:3px;border-right:0;border-bottom:0}
+.loc-photo-frame .lpc.tr{top:3px;right:3px;border-left:0;border-bottom:0}
+.loc-photo-frame .lpc.bl{bottom:3px;left:3px;border-right:0;border-top:0}
+.loc-photo-frame .lpc.br{bottom:3px;right:3px;border-left:0;border-top:0}
+@media (max-width:520px){ .loc-photo-frame img{height:200px} }
+
 /* ── Doble evento en un solo card ─────────────────────── */
 .loc-dual{
   display:flex;align-items:center;justify-content:center;
@@ -2187,10 +2208,9 @@ section,#footer,.container{max-width:100%;overflow-x:clip}
 
     <h3 class="loc-name">Ceremonia Religiosa</h3>
     <p style="font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--peach-accent);font-weight:600;text-align:center;margin:6px 0 4px;letter-spacing:1px">5:00 <em style="font-size:15px">pm</em></p>
-    <div class="loc-map-wrap">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.5!2d-99.22!3d18.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDUxJzAwLjAiTiA5OcKwMTMnMTIuMCJX!5e0!3m2!1ses!2smx!4v1"
-        loading="lazy" allowfullscreen title="Mapa Ceremonia Religiosa"></iframe>
+    <div class="loc-photo-frame">
+      <span class="lpc tl"></span><span class="lpc tr"></span><span class="lpc bl"></span><span class="lpc br"></span>
+      <img src="iglesia.jpg" alt="Iglesia · Ceremonia Religiosa" loading="lazy">
     </div>
     <a href="https://maps.app.goo.gl/F74PPWYF2ei4wHqb6" target="_blank" rel="noopener" class="btn btn-olive" style="max-width:280px;margin:14px auto 0;display:flex">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -2217,10 +2237,9 @@ section,#footer,.container{max-width:100%;overflow-x:clip}
     <h3 class="loc-name">Recepción</h3>
     <p style="font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--peach-accent);font-weight:600;text-align:center;margin:6px 0 4px;letter-spacing:1px">6:00 <em style="font-size:15px">pm</em></p>
     <p class="loc-addr">Coral Club · Cuernavaca</p>
-    <div class="loc-map-wrap">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.5!2d-99.23!3d18.84!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDUwJzI0LjAiTiA5OcKwMTMnNDguMCJX!5e0!3m2!1ses!2smx!4v1"
-        loading="lazy" allowfullscreen title="Mapa Recepción"></iframe>
+    <div class="loc-photo-frame">
+      <span class="lpc tl"></span><span class="lpc tr"></span><span class="lpc bl"></span><span class="lpc br"></span>
+      <img src="salon.jpg" alt="Salón · Recepción" loading="lazy">
     </div>
     <a href="https://maps.app.goo.gl/fdpWfcmTEvpUSesa9" target="_blank" rel="noopener" class="btn btn-olive" style="max-width:280px;margin:14px auto 0;display:flex">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
