@@ -531,6 +531,29 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
   letter-spacing:.3px;
 }
 
+/* ── Jerarquía rediseñada (ui-ux-pro-max) ────────────── */
+.loc-venue{
+  font-family:'Great Vibes',cursive;font-weight:400;
+  font-size:clamp(42px,11.5vw,62px);
+  color:var(--peach-accent);
+  line-height:1.06;letter-spacing:.5px;
+  margin:6px auto 2px;max-width:92%;
+}
+.loc-time{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'Cormorant Garamond',serif;font-weight:600;
+  font-size:20px;letter-spacing:1.5px;color:var(--cream);
+  margin:14px auto 6px;
+}
+.loc-time::before,.loc-time::after{content:"";width:30px;height:1px;background:var(--peach);opacity:.55}
+.loc-time em{font-style:italic;font-weight:500;font-size:13px;color:var(--peach-accent);letter-spacing:.5px}
+.loc-place{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:15px;letter-spacing:.4px;
+  color:var(--cream);opacity:.68;
+  line-height:1.6;margin:0 auto 26px;
+}
+
 /* ── MEDALLÓN CIRCULAR ────────────────────────────────── */
 .loc-medallion{
   position:relative;
@@ -2206,8 +2229,10 @@ section,#footer,.container{max-width:100%;overflow-x:clip}
       </svg>
     </div>
 
-    <h3 class="loc-name">Ceremonia Religiosa</h3>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--peach-accent);font-weight:600;text-align:center;margin:6px 0 4px;letter-spacing:1px">5:00 <em style="font-size:15px">pm</em></p>
+    <span class="loc-type">Ceremonia Religiosa</span>
+    <h3 class="loc-venue">Iglesia</h3>
+    <p class="loc-time">5:00 <em>pm</em></p>
+    <p class="loc-place">Cuernavaca, Morelos</p>
     <div class="loc-photo-frame">
       <span class="lpc tl"></span><span class="lpc tr"></span><span class="lpc bl"></span><span class="lpc br"></span>
       <img src="iglesia.jpg" alt="Iglesia · Ceremonia Religiosa" loading="lazy">
@@ -2234,9 +2259,10 @@ section,#footer,.container{max-width:100%;overflow-x:clip}
       </svg>
     </div>
 
-    <h3 class="loc-name">Recepción</h3>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--peach-accent);font-weight:600;text-align:center;margin:6px 0 4px;letter-spacing:1px">6:00 <em style="font-size:15px">pm</em></p>
-    <p class="loc-addr">Coral Club · Cuernavaca</p>
+    <span class="loc-type">Recepción</span>
+    <h3 class="loc-venue">Coral Clubes Cuernavaca</h3>
+    <p class="loc-time">6:00 <em>pm</em></p>
+    <p class="loc-place">Cuernavaca, Morelos</p>
     <div class="loc-photo-frame">
       <span class="lpc tl"></span><span class="lpc tr"></span><span class="lpc bl"></span><span class="lpc br"></span>
       <img src="salon.jpg" alt="Salón · Recepción" loading="lazy">
