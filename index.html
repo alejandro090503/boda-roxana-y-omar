@@ -2065,15 +2065,97 @@ section,#footer,.container{max-width:100%;overflow-x:clip}
 <!-- AUDIO ambiental -->
 <audio id="bgMusic" src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/audio-bodas/boda-roxana-y-omar/cancion.mp3" loop preload="none" crossorigin="anonymous"></audio>
 
-<!-- BOTÓN flotante de música -->
-<button id="musicBtn" class="music-btn" aria-label="Música de fondo">
-  <svg id="musicIcoPlay" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <svg id="musicIcoPause" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:none">
-    <rect x="6" y="4" width="4" height="16" rx="1.5" fill="currentColor"/>
-    <rect x="14" y="4" width="4" height="16" rx="1.5" fill="currentColor"/>
-  </svg>
+<!-- BOTÓN flotante de música · DISCO DE VINILO (estilo boda-samantha-y-alexander) -->
+<style>
+.vinyl-btn{
+  position:fixed;bottom:20px;right:20px;z-index:50;
+  width:72px;height:72px;border-radius:50%;padding:0;
+  border:none;cursor:pointer;background:transparent;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1);
+  box-shadow:0 4px 18px rgba(42,16,40,.45),0 0 0 1px rgba(182,7,176,.18);
+}
+.vinyl-btn:hover{transform:scale(1.1)}
+.vinyl-spin{width:100%;height:100%;border-radius:50%;position:relative;transition:none}
+.vinyl-btn.is-playing .vinyl-spin{animation:vinylSpin 1.8s linear infinite}
+@keyframes vinylSpin{to{transform:rotate(360deg)}}
+.vinyl-disc{width:100%;height:100%;border-radius:50%;overflow:hidden;position:relative;
+  background:
+    radial-gradient(circle,#2a1028 4%,transparent 4.5%),
+    radial-gradient(circle,#d36fd0 0%,#b607b0 17%,#7a0580 19%,transparent 19.5%),
+    repeating-radial-gradient(circle,
+      transparent 20%,rgba(255,255,255,.06) 20.8%,transparent 21.5%,
+      transparent 24%,rgba(255,255,255,.04) 24.8%,transparent 25.5%,
+      transparent 28%,rgba(255,255,255,.06) 28.8%,transparent 29.5%,
+      transparent 32%,rgba(255,255,255,.04) 32.8%,transparent 33.5%,
+      transparent 36%,rgba(255,255,255,.06) 36.8%,transparent 37.5%,
+      transparent 40%,rgba(255,255,255,.04) 40.8%,transparent 41.5%,
+      transparent 44%,rgba(255,255,255,.06) 44.8%,transparent 45.5%,
+      transparent 48%,rgba(255,255,255,.04) 48.8%,transparent 49.5%,
+      transparent 52%,rgba(255,255,255,.06) 52.8%,transparent 53.5%,
+      transparent 56%,rgba(255,255,255,.04) 56.8%,transparent 57.5%,
+      transparent 60%,rgba(255,255,255,.06) 60.8%,transparent 61.5%,
+      transparent 64%,rgba(255,255,255,.04) 64.8%,transparent 65.5%,
+      transparent 68%,rgba(255,255,255,.06) 68.8%,transparent 69.5%,
+      transparent 72%,rgba(255,255,255,.04) 72.8%,transparent 73.5%,
+      transparent 76%,rgba(255,255,255,.06) 76.8%,transparent 77.5%,
+      transparent 80%,rgba(255,255,255,.04) 80.8%,transparent 81.5%,
+      transparent 84%,rgba(255,255,255,.06) 84.8%,transparent 85.5%,
+      transparent 88%,rgba(255,255,255,.04) 88.8%,transparent 89.5%,
+      transparent 92%,rgba(255,255,255,.06) 92.8%,transparent 93.5%,
+      transparent 96%,rgba(255,255,255,.04) 96.8%,transparent 97.5%
+    ),
+    radial-gradient(circle,#2a1028 0%,#3a1838 60%,#2a1028 100%);
+  box-shadow:inset 0 0 8px rgba(0,0,0,.4);
+}
+.vinyl-sheen{position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.09) 42%,rgba(255,255,255,.15) 48%,rgba(255,255,255,.09) 54%,transparent 66%);
+  pointer-events:none}
+.vinyl-label-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Great Vibes',cursive;font-size:12px;color:#fafafa;
+  text-align:center;line-height:1.1;opacity:.9;pointer-events:none;width:26px}
+.vinyl-label-text small{font-family:'Lato',sans-serif;font-size:5px;letter-spacing:.15em;display:block;margin-top:1px;opacity:.7}
+.vinyl-hole{position:absolute;top:50%;left:50%;width:6px;height:6px;transform:translate(-50%,-50%);
+  border-radius:50%;background:#2a1028;box-shadow:0 0 0 1.5px rgba(182,7,176,.5)}
+.vinyl-icons{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:18px;height:18px;pointer-events:none;z-index:2}
+.vinyl-icons svg{width:100%;height:100%;display:block}
+.vinyl-icon-pause{display:none}
+.vinyl-btn.is-playing .vinyl-icon-play{display:none}
+.vinyl-btn.is-playing .vinyl-icon-pause{display:block}
+.vinyl-btn::after{content:"";position:absolute;inset:-5px;border-radius:50%;
+  border:1px solid var(--peach);opacity:.3;animation:vinylPulse 3s ease-in-out infinite}
+.vinyl-btn.is-playing::after{animation-duration:1.6s}
+@keyframes vinylPulse{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.12);opacity:.05}}
+.vinyl-tonearm{position:absolute;top:-4px;right:-2px;width:24px;height:34px;
+  transform-origin:top right;transform:rotate(-28deg);
+  transition:transform .6s cubic-bezier(.2,.7,.2,1);pointer-events:none;z-index:1}
+.vinyl-btn.is-playing .vinyl-tonearm{transform:rotate(-12deg)}
+.vinyl-tonearm-line{position:absolute;top:2px;right:4px;width:2px;height:28px;
+  background:linear-gradient(to bottom,#7a0580,#b607b0 40%,#7a0580);border-radius:1px;transform:rotate(-5deg);transform-origin:top center}
+.vinyl-tonearm-head{position:absolute;bottom:0;right:2px;width:5px;height:6px;background:#b607b0;border-radius:0 0 2px 2px}
+.vinyl-tonearm-pivot{position:absolute;top:0;right:2px;width:7px;height:7px;
+  background:radial-gradient(circle,#d36fd0,#7a0580);border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+@media (prefers-reduced-motion:reduce){
+  .vinyl-btn.is-playing .vinyl-spin{animation:none}
+  .vinyl-btn::after{animation:none}
+}
+</style>
+<button id="musicBtn" class="vinyl-btn" type="button" aria-label="Música de la invitación">
+  <div class="vinyl-tonearm">
+    <div class="vinyl-tonearm-pivot"></div>
+    <div class="vinyl-tonearm-line"></div>
+    <div class="vinyl-tonearm-head"></div>
+  </div>
+  <div class="vinyl-spin">
+    <div class="vinyl-disc">
+      <div class="vinyl-sheen"></div>
+      <div class="vinyl-label-text">M&amp;C<small>2026</small></div>
+      <div class="vinyl-hole"></div>
+    </div>
+  </div>
+  <div class="vinyl-icons">
+    <svg class="vinyl-icon-play" viewBox="0 0 24 24" fill="#fafafa" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="vinyl-icon-pause" viewBox="0 0 24 24" fill="#fafafa" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+  </div>
 </button>
 
 
@@ -2138,7 +2220,7 @@ section,#footer,.container{max-width:100%;overflow-x:clip}
 .hero-date{text-align:center;padding:50px 24px 8px;background:var(--ink)}
 .hd-eyebrow{font-family:'Lato',sans-serif;font-size:11px;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--peach);display:block;margin-bottom:16px}
 .hd-main{display:inline-flex;align-items:center;justify-content:center;gap:clamp(12px,4vw,20px)}
-.hd-num,.hd-yr{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,11vw,56px);font-weight:600;line-height:1;color:var(--cream)}
+.hd-num,.hd-yr{font-family:'Great Vibes',cursive;font-size:clamp(34px,9.5vw,48px);font-weight:400;line-height:1;color:var(--peach-accent)}
 .hd-mon{font-family:'Great Vibes',cursive;font-size:clamp(34px,9.5vw,48px);line-height:1;color:var(--peach-accent)}
 .hd-sep{width:1px;height:clamp(36px,9.5vw,48px);background:linear-gradient(180deg,transparent,var(--peach),transparent)}
 .hd-loc{display:block;margin-top:18px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;letter-spacing:.5px;color:var(--cream);opacity:.7}
@@ -3900,16 +3982,11 @@ function toast(msg) {
   const audio = document.getElementById('bgMusic');
   const btn   = document.getElementById('musicBtn');
   if(!audio || !btn) return;
-  const icoPlay  = document.getElementById('musicIcoPlay');
-  const icoPause = document.getElementById('musicIcoPause');
-
   audio.volume = 0.32;
 
   function syncIcons(){
     const isPlaying = !audio.paused && !audio.ended;
-    if (icoPlay)  icoPlay.style.display  = isPlaying ? 'none'  : 'block';
-    if (icoPause) icoPause.style.display = isPlaying ? 'block' : 'none';
-    btn.classList.toggle('on', isPlaying);
+    btn.classList.toggle('is-playing', isPlaying);
   }
 
   audio.addEventListener('play',  syncIcons);
