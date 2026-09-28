@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="format-detection" content="telephone=no,date=no,address=no,email=no">
   <meta name="theme-color" content="#efeafb">
   <title>Margarita &amp; Cristhian · 19 · Diciembre · 2026</title>
   <meta name="description" content="Nos casamos. Acompáñanos el 19 de diciembre de 2026 en Temixco, Morelos. Con todo nuestro amor, Margarita & Cristhian.">
@@ -1204,95 +1205,95 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
   color:var(--peach-accent);font-style:italic;font-weight:600;
 }
 
+/* ── Galería · RUEDA DE LA FORTUNA ── */
 .wheel-stage{
   position:relative;width:100%;
-  height:min(680px,108vw);
+  height:min(660px,106vw);
   max-width:1080px;
-  margin:30px auto 0;
-  padding:clamp(18px,4vw,40px);
+  margin:26px auto 0;
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
 }
 .wheel-stage::before{
   content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at center, rgba(139,92,246,.08) 0%, transparent 55%);
+  background:radial-gradient(circle at center, rgba(139,92,246,.10) 0%, transparent 58%);
   pointer-events:none;
 }
 .wheel{
   position:relative;
-  width:min(560px,86vw);
-  height:min(560px,86vw);
-  transform-style:preserve-3d;
+  width:min(540px,88vw);
+  height:min(540px,88vw);
   will-change:transform;
+  touch-action:pan-y;
+  cursor:grab;
 }
+.wheel.dragging{cursor:grabbing}
+/* Aros decorativos */
 .wheel-spoke{
   position:absolute;inset:0;pointer-events:none;
-  border:1px dashed rgba(139,92,246,.42);
+  border:1px dashed rgba(139,92,246,.40);
   border-radius:50%;opacity:.55;
 }
 .wheel-spoke--inner{
-  inset:36%;
-  border:1px solid rgba(139,92,246,.6);
-  opacity:.65;
+  inset:30%;
+  border:1px solid rgba(139,92,246,.55);
+  opacity:.6;
 }
+/* Centro: monograma */
 .wheel-hub{
   position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:clamp(86px,16vw,120px);
-  height:clamp(86px,16vw,120px);
+  width:clamp(74px,17vw,108px);height:clamp(74px,17vw,108px);
+  margin-left:calc(clamp(74px,17vw,108px) / -2);
+  margin-top:calc(clamp(74px,17vw,108px) / -2);
   border-radius:50%;
-  background:
-    radial-gradient(circle, #f3effb 0%, #f1ecfb 55%, transparent 80%),
-    radial-gradient(circle at 35% 30%, rgba(255,255,255,.6), transparent 60%);
-  border:1px solid rgba(139,92,246,.55);
   display:flex;align-items:center;justify-content:center;
-  box-shadow:
-    inset 0 2px 10px rgba(139,92,246,.22),
-    0 6px 20px -6px rgba(109,40,217,.28),
-    0 20px 50px -20px rgba(109,40,217,.36);
-  z-index:3;overflow:hidden;
+  will-change:transform;
+  background:radial-gradient(circle at 35% 30%, #fff 0%, #f4f0fe 60%, #ece5fd 100%);
+  border:1px solid rgba(139,92,246,.45);
+  box-shadow:inset 0 2px 10px rgba(139,92,246,.16), 0 6px 20px -8px rgba(109,40,217,.30);
+  z-index:3;pointer-events:none;
 }
-.wheel-hub img{width:88%;height:auto;filter:drop-shadow(0 2px 6px rgba(109,40,217,.24))}
+.wheel-hub span{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(24px,5.6vw,34px);
+  color:var(--peach-accent);
+  line-height:1;
+}
+/* Cards */
 .wheel-item{
-  position:absolute;
-  top:50%;left:50%;
-  width:clamp(86px,18vw,140px);
-  height:clamp(114px,24vw,186px);
-  margin-left:calc(clamp(86px,18vw,140px) / -2);
-  margin-top:calc(clamp(114px,24vw,186px) / -2);
-  --angle:calc((360deg / 12) * var(--i));
-  transform:rotate(var(--angle)) translateY(calc(-1 * min(220px,38vw)));
-  transform-origin:center center;
+  position:absolute;top:50%;left:50%;
+  width:var(--cw,96px);height:var(--ch,128px);
+  margin-left:calc(var(--cw,96px) / -2);
+  margin-top:calc(var(--ch,128px) / -2);
+  --angle:calc((360deg / var(--n,11)) * var(--i));
+  transform:rotate(var(--angle)) translateY(calc(-1 * var(--r,170px)));
 }
 .wheel-item-inner{
   width:100%;height:100%;
+  /* contrarrotación: la aplica WAAPI (compositor). Fallback estático aquí. */
   transform:rotate(calc(-1 * var(--angle)));
-  transform-origin:center center;
+  will-change:transform;
   position:relative;overflow:hidden;
-  border:1px solid rgba(139,92,246,.5);
-  background:#fff;
-  box-shadow:
-    0 2px 4px rgba(109,40,217,.08),
-    0 8px 20px -6px rgba(109,40,217,.22),
-    0 24px 60px -28px rgba(109,40,217,.36);
-  transition:box-shadow .5s ease;
+  border-radius:10px;
+  border:1px solid rgba(139,92,246,.50);
+  background:#efeafb;
+  box-shadow:0 2px 5px rgba(109,40,217,.12), 0 10px 24px -10px rgba(109,40,217,.38);
+  transition:border-color .35s ease, box-shadow .35s ease;
   cursor:zoom-in;
+  user-select:none;-webkit-user-select:none;
 }
 .wheel-item-inner::after{
-  content:"";position:absolute;inset:5px;
-  border:1px solid rgba(255,252,248,.32);
-  pointer-events:none;z-index:2;
+  content:"";position:absolute;inset:4px;
+  border:1px solid rgba(255,255,255,.42);
+  border-radius:7px;pointer-events:none;z-index:2;
 }
 .wheel-item-inner img{
   width:100%;height:100%;object-fit:cover;display:block;
-  filter:saturate(.98) contrast(1.04);
   pointer-events:none;
 }
-.wheel-item:hover .wheel-item-inner{
-  box-shadow:
-    0 2px 4px rgba(109,40,217,.1),
-    0 10px 26px -6px rgba(139,92,246,.42),
-    0 28px 70px -24px rgba(109,40,217,.45);
+.wheel-item-inner:hover{
+  border-color:rgba(109,40,217,.85);
+  box-shadow:0 2px 6px rgba(109,40,217,.16), 0 14px 32px -10px rgba(139,92,246,.55);
 }
 .gal-hint{
   font-family:'Cormorant Garamond',serif;
@@ -1349,7 +1350,7 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
 }
 
 @media (max-width:520px){
-  .wheel-item{transform:rotate(var(--angle)) translateY(calc(-1 * min(205px,40vw)))}
+  .gal-hint{font-size:13px;letter-spacing:2.5px}
 }
 
 /* ── RSVP ─────────────────────────────────────────────── */
@@ -1473,7 +1474,15 @@ h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3}
 .gf-bk-lbl{font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--cream);opacity:.6}
 .gf-bk-val{color:var(--cream);font-size:12px;text-align:right}
 .gf-bk-clabe-wrap{flex-direction:column;align-items:center;gap:6px;padding-top:12px}
-.gf-bk-clabe{font-family:'Lato',monospace;color:var(--peach);font-size:15px;letter-spacing:2px;width:100%;text-align:center}
+.gf-bk-clabe{
+  font-family:'Lato',monospace;color:var(--peach);
+  font-size:15px;letter-spacing:2px;text-align:center;
+  display:inline-block;width:auto;
+  padding-bottom:5px;
+  border-bottom:2px solid var(--peach);   /* subrayado uniforme: cubre TODOS los dígitos */
+  -webkit-text-decoration:none;text-decoration:none;
+}
+.gf-bk-clabe a{color:inherit;text-decoration:none;pointer-events:none}
 .gf-copy{margin-top:14px;width:100%;max-width:260px;margin-left:auto;margin-right:auto;font-size:10px;padding:13px 16px}
 
 /* ── ALBUM QR ─────────────────────────────────────────── */
@@ -2002,12 +2011,8 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 
   /* Gallery */
   #gallery{padding:48px 12px;overflow:hidden}
-  .wheel-stage{height:min(520px,100vw)}
-  .wheel{width:min(400px,82vw);height:min(400px,82vw)}
-  .wheel-item{width:clamp(68px,17vw,110px);height:clamp(90px,22vw,146px);
-    margin-left:calc(clamp(68px,17vw,110px) / -2);
-    margin-top:calc(clamp(90px,22vw,146px) / -2)}
-  .wheel-hub{width:clamp(66px,14vw,96px);height:clamp(66px,14vw,96px)}
+  .wheel-stage{height:min(520px,104vw)}
+  .wheel{width:min(400px,90vw);height:min(400px,90vw)}
 
   /* Hospedaje */
   .hosp-carousel{max-width:340px}
@@ -2031,11 +2036,8 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   .cd-ring-lbl{font-size:7px;letter-spacing:1.5px}
   .cd-ring-grid{gap:4px}
   .cd-ring-item{padding:12px 2px 10px}
-  .wheel-stage{height:min(440px,95vw)}
-  .wheel{width:min(320px,80vw);height:min(320px,80vw)}
-  .wheel-item{width:clamp(54px,15vw,86px);height:clamp(72px,20vw,114px);
-    margin-left:calc(clamp(54px,15vw,86px) / -2);
-    margin-top:calc(clamp(72px,20vw,114px) / -2)}
+  .wheel-stage{height:min(430px,100vw)}
+  .wheel{width:min(330px,88vw);height:min(330px,88vw)}
   .hosp-photo{width:152px;height:152px}
   .hosp-arrow{top:84px}
   .verse-text{font-size:15px}
@@ -2586,21 +2588,7 @@ Si deseas acompañarnos con una aportación,<br>te dejamos nuestros datos bancar
     <img src="vestimenta.jpeg" alt="Código de vestimenta · opciones de vestuario" loading="lazy">
   </div>
 
-  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;letter-spacing:2.5px;text-transform:uppercase;color:var(--peach);text-align:center;margin:18px 0 14px;font-weight:600">Paleta sugerida</p>
-  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:320px;margin:0 auto">
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#252850,#1a1c3a);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12);position:relative" title="Azul oscuro"></span>
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#D4C5B2,#b8aa8a);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12)" title="Champagne"></span>
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#000080,#000050);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12)" title="Navy"></span>
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#722f37,#5a2029);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12)" title="Vino"></span>
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#50c878,#3aa55e);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12)" title="Esmeralda"></span>
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#673147,#4f2537);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12)" title="Ciruela"></span>
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#a9a9a9,#8a8a8a);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12)" title="Gris"></span>
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#054852,#033038);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12)" title="Teal"></span>
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#8ba084,#6d8266);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12)" title="Sage"></span>
-    <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#000000,#1a1a1a);box-shadow:0 2px 8px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.12)" title="Negro"></span>
-  </div>
-
-  <div style="margin-top:18px;text-align:center">
+  <div style="margin-top:26px;text-align:center">
     <p style="font-family:'Lato',sans-serif;font-size:14px;font-weight:600;letter-spacing:.8px;color:var(--peach-accent);margin-bottom:10px">Colores a evitar</p>
     <div style="display:inline-flex;gap:14px;justify-content:center;align-items:center">
       <span style="width:22px;height:22px;border-radius:50%;background:#5d6532;display:inline-block;box-shadow:0 2px 8px rgba(0,0,0,.15);position:relative" title="Verde olivo"></span>
@@ -2629,12 +2617,12 @@ Si deseas acompañarnos con una aportación,<br>te dejamos nuestros datos bancar
   <div class="gline"></div>
 
   <p class="fam-ttl">Padres del Novio</p>
-  <div class="fam-card"><p class="fam-nms">Yolanda Pérez Preciado<span class="fam-sep">&amp;</span><svg viewBox="0 0 12 16" width="10" height="14" fill="none" stroke="var(--peach)" stroke-width="1.2" stroke-linecap="round" style="display:inline-block;vertical-align:middle;margin:-2px 2px 0 0"><line x1="6" y1="1" x2="6" y2="15"/><line x1="2" y1="5" x2="10" y2="5"/></svg>Armando Pérez Osorio</p></div>
+  <div class="fam-card"><p class="fam-nms">Yolanda Pérez Preciado<span class="fam-sep">&amp;</span><svg viewBox="0 0 16 16" width="12" height="12" fill="#fff" stroke="var(--peach)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin:-2px 3px 0 0"><path d="M8 13.6S2.6 10.3 2.6 6.7A2.9 2.9 0 0 1 8 5.1a2.9 2.9 0 0 1 5.4 1.6c0 3.6-5.4 6.9-5.4 6.9z"/></svg>Armando Pérez Osorio</p></div>
 
   <div class="sdiv"></div>
 
   <p class="fam-ttl">Padres de la Novia</p>
-  <div class="fam-card"><p class="fam-nms"><svg viewBox="0 0 12 16" width="10" height="14" fill="none" stroke="var(--peach)" stroke-width="1.2" stroke-linecap="round" style="display:inline-block;vertical-align:middle;margin:-2px 2px 0 0"><line x1="6" y1="1" x2="6" y2="15"/><line x1="2" y1="5" x2="10" y2="5"/></svg>Irma Carreño Carreño<span class="fam-sep">&amp;</span>Enrique Ramón Galindo Vázquez</p></div>
+  <div class="fam-card"><p class="fam-nms"><svg viewBox="0 0 16 16" width="12" height="12" fill="#fff" stroke="var(--peach)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin:-2px 3px 0 0"><path d="M8 13.6S2.6 10.3 2.6 6.7A2.9 2.9 0 0 1 8 5.1a2.9 2.9 0 0 1 5.4 1.6c0 3.6-5.4 6.9-5.4 6.9z"/></svg>Irma Carreño Carreño<span class="fam-sep">&amp;</span>Enrique Ramón Galindo Vázquez</p></div>
 
   <div class="sdiv"></div>
 
@@ -2649,12 +2637,12 @@ Si deseas acompañarnos con una aportación,<br>te dejamos nuestros datos bancar
         <div class="padrino-slide">
           <div class="padrino-icon"><svg viewBox="0 0 64 64"><rect x="22" y="28" width="8" height="24" rx="1.5"/><rect x="34" y="28" width="8" height="24" rx="1.5"/><line x1="26" y1="28" x2="26" y2="22"/><line x1="38" y1="28" x2="38" y2="22"/><path d="M26 22c-2.2-2.2-2.2-4.5 0-6.8 2.2 2.3 2.2 4.6 0 6.8Z"/><path d="M38 22c-2.2-2.2-2.2-4.5 0-6.8 2.2 2.3 2.2 4.6 0 6.8Z"/><line x1="17" y1="52" x2="47" y2="52"/></svg></div>
           <div class="padrino-rol">Velación</div>
-          <p class="padrino-names">Ramón Galindo Carreño<br>y Jessica Magali Duran Trejo</p>
+          <p class="padrino-names">Ramón Galindo Carreño<br>y Jessica Magaly Durán Trejo</p>
         </div>
         <div class="padrino-slide">
           <div class="padrino-icon"><svg viewBox="0 0 64 64"><circle cx="26" cy="34" r="13"/><circle cx="40" cy="34" r="13"/></svg></div>
           <div class="padrino-rol">Anillos</div>
-          <p class="padrino-names">Tania Itzel Regalado Pérez<br>y Arturo García</p>
+          <p class="padrino-names">Tania Itzel Regalado Pérez<br>y Arturo García Delgado</p>
         </div>
         <div class="padrino-slide">
           <div class="padrino-icon"><svg viewBox="0 0 64 64"><path d="M44 24c-6.6 0-10 8-12 8s-5.4-8-12-8a8 8 0 000 16c6.6 0 10-8 12-8s5.4 8 12 8a8 8 0 000-16Z"/></svg></div>
@@ -2679,7 +2667,7 @@ Si deseas acompañarnos con una aportación,<br>te dejamos nuestros datos bancar
         <div class="padrino-slide">
           <div class="padrino-icon"><svg viewBox="0 0 64 64"><path d="M32 56 L26 38M32 56 L38 38M32 56 L32 36"/><circle cx="26" cy="30" r="6.5"/><circle cx="38" cy="30" r="6.5"/><circle cx="32" cy="22" r="6.5"/><path d="M23 52 Q32 47 41 52"/></svg></div>
           <div class="padrino-rol">Ramo</div>
-          <p class="padrino-names">Patricia Galindo Vázquez</p>
+          <p class="padrino-names">Martha Patricia Galindo Vázquez</p>
         </div>
       </div>
     </div>
@@ -2713,25 +2701,25 @@ Si deseas acompañarnos con una aportación,<br>te dejamos nuestros datos bancar
   <p class="gal-sub"><em>Momentos que atesoramos</em></p>
 
   <div class="wheel-stage">
-    <div class="wheel" id="wheel">
+    <div class="wheel" id="wheel" style="--n:11">
       <div class="wheel-spoke" aria-hidden="true"></div>
       <div class="wheel-spoke wheel-spoke--inner" aria-hidden="true"></div>
-      <div class="wheel-item" style="--i:0"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093584028-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:1"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093591943-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:2"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093599099-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:3"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093607687-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:4"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093614631-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:5"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093620929-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:6"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093584028-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:7"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093591943-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:8"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093599099-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:9"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093607687-0.jpeg"  alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:10"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093614631-0.jpeg" alt="Margarita y Cristhian" loading="lazy"></div></div>
-      <div class="wheel-item" style="--i:11"><div class="wheel-item-inner"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/c4fb4858-3ae8-427a-9364-70827798ab54/1782093620929-0.jpeg" alt="Margarita y Cristhian" loading="lazy"></div></div>
+      <div class="wheel-hub" aria-hidden="true"><span>M&amp;C</span></div>
+      <div class="wheel-item" style="--i:0"><div class="wheel-item-inner"><img src="th1.jpg" data-full="foto1.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:1"><div class="wheel-item-inner"><img src="th2.jpg" data-full="foto2.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:2"><div class="wheel-item-inner"><img src="th3.jpg" data-full="foto3.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:3"><div class="wheel-item-inner"><img src="th4.jpg" data-full="foto4.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:4"><div class="wheel-item-inner"><img src="th5.jpg" data-full="foto5.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:5"><div class="wheel-item-inner"><img src="th6.jpg" data-full="foto6.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:6"><div class="wheel-item-inner"><img src="th7.jpg" data-full="foto7.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:7"><div class="wheel-item-inner"><img src="th8.jpg" data-full="foto8.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:8"><div class="wheel-item-inner"><img src="th9.jpg" data-full="foto9.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:9"><div class="wheel-item-inner"><img src="th10.jpg" data-full="foto10.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
+      <div class="wheel-item" style="--i:10"><div class="wheel-item-inner"><img src="th11.jpg" data-full="foto11.jpg" alt="Margarita y Cristhian" decoding="async" width="320" height="320"></div></div>
     </div>
   </div>
 
-  <p class="gal-hint">Desliza para descubrir</p>
+  <p class="gal-hint">Gira la rueda</p>
 </section>
 
 <!-- Lightbox para la galería -->
@@ -2940,7 +2928,7 @@ initSwipeCarousel('hospTrack','hospDots','.hosp-arrow');
 
         <div class="lbl" style="opacity:.85">Confirmación de asistencia</div>
         <h2 class="rsvp-title">Tu presencia <em>significa</em> todo</h2>
-        <p class="rsvp-text">Confirma tu asistencia antes del <strong>15 de Septiembre de 2026</strong>. Si no confirmas a esa fecha daremos por entendido que no asistirás.</p>
+        <p class="rsvp-text">Confirma tu asistencia antes del <strong>31 de Octubre de 2026</strong>. Si no confirmas a esa fecha daremos por entendido que no asistirás.</p>
 
         <p id="rsvpParaNote" style="display:none;font-family:'Great Vibes',cursive;font-size:clamp(28px,7vw,42px);color:var(--peach);line-height:1.2;margin:16px auto 4px"></p>
 
@@ -2971,7 +2959,7 @@ initSwipeCarousel('hospTrack','hospDots','.hosp-arrow');
 
           <div class="rsvp-deadline">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5z"/></svg>
-            Fecha límite · 15 Sep 2026
+            Fecha límite · 31 Oct 2026
           </div>
         </div>
       </div>
@@ -3519,7 +3507,7 @@ document.querySelectorAll('input[name="att"]').forEach(r => {
 (function(){
   const PANEL_API = 'https://panel-invitados.vercel.app/api/confirmar';
   const RSVP_URL  = 'https://boda-roxana-y-omar.vercel.app';
-  const DEADLINE  = new Date(2026, 8, 15, 23, 59, 59, 999);
+  const DEADLINE  = new Date(2026, 9, 31, 23, 59, 59, 999);
   const frozen    = Date.now() > DEADLINE.getTime();
   const params    = new URLSearchParams(location.search);
   const urlPara   = (params.get('para') || '').trim();
@@ -3918,70 +3906,114 @@ function initGallery() { initWheel(); initGalLightbox(); }
 function initWheel() {
   const wheel = document.getElementById('wheel');
   if (!wheel) return;
-  const items = wheel.querySelectorAll('.wheel-item-inner');
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const items = [...wheel.querySelectorAll('.wheel-item')];
+  const inners = items.map(el => el.querySelector('.wheel-item-inner'));
+  const hub = wheel.querySelector('.wheel-hub');
+  const n = items.length;
+  if (!n) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  gsap.fromTo('.wheel-item', {opacity:0, scale:.4}, {
-    opacity:1, scale:1, duration:1.2, stagger:.06, ease:'back.out(1.3)',
-    scrollTrigger:{ trigger:'.wheel-stage', start:'top 78%' }
+  /* ── Geometría: card máxima que cabe y NO se traslapa ── */
+  const GAP = 8, MARGIN = 6, RATIO = 1.34;
+  function layout() {
+    const st   = wheel.parentElement.getBoundingClientRect();
+    const half = Math.min(st.width, st.height) / 2;
+    const k    = n / (2 * Math.PI);
+    let cw = (half - MARGIN - k * GAP) / (k + RATIO / 2);
+    cw = Math.max(52, Math.min(120, cw));
+    wheel.style.setProperty('--cw', cw + 'px');
+    wheel.style.setProperty('--ch', cw * RATIO + 'px');
+    wheel.style.setProperty('--r',  k * (cw + GAP) + 'px');
+  }
+  layout();
+  let rzT = 0;
+  window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(layout, 150); });
+
+  /* ── Giro con animaciones compositadas (WAAPI): 0 trabajo de JS en reposo ──
+     La rueda gira 0→360 y cada foto gira -360 para quedarse siempre derecha. */
+  const DUR = 80000;                    // 80 s por vuelta: deriva lenta y elegante
+  const opts = { duration: DUR, iterations: Infinity, easing: 'linear' };
+  const anims = [];
+  anims.push(wheel.animate(
+    [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }], opts));
+  inners.forEach((el, i) => {
+    const a = -360 / n * i;             // contrarresta el ángulo propio de la card
+    anims.push(el.animate(
+      [{ transform: 'rotate(' + a + 'deg)' }, { transform: 'rotate(' + (a - 360) + 'deg)' }], opts));
   });
-  gsap.fromTo('.wheel-spoke', {opacity:0, scale:.8}, {
-    opacity:.5, scale:1, duration:1.4, ease:'power3.out',
-    scrollTrigger:{ trigger:'.wheel-stage', start:'top 78%' }
+  if (hub) anims.push(hub.animate(
+    [{ transform: 'rotate(0deg)' }, { transform: 'rotate(-360deg)' }], opts));
+
+  const setTime = t => { const v = ((t % DUR) + DUR) % DUR; for (const an of anims) an.currentTime = v; };
+  const now     = () => anims[0].currentTime || 0;
+  const degToMs = d => d / 360 * DUR;
+
+  if (reduced) anims.forEach(a => a.pause());
+
+  /* Pausa total cuando la sección no está en pantalla */
+  const io = new IntersectionObserver(es => {
+    if (reduced) return;
+    es[0].isIntersecting ? anims.forEach(a => a.play()) : anims.forEach(a => a.pause());
+  }, { threshold: 0.02 });
+  io.observe(wheel.parentElement);
+
+  /* ── Arrastre: la rueda sigue al dedo (ángulo real respecto al centro) ── */
+  let drag = false, startAngle = 0, startTime = 0, moved = 0, vel = 0, lastT = 0, raf = 0;
+
+  function angleAt(x, y) {
+    const b = wheel.getBoundingClientRect();
+    return Math.atan2(y - (b.top + b.height / 2), x - (b.left + b.width / 2)) * 180 / Math.PI;
+  }
+  function down(x, y) {
+    drag = true; moved = 0; vel = 0;
+    cancelAnimationFrame(raf);
+    anims.forEach(a => a.pause());
+    startAngle = angleAt(x, y); startTime = now(); lastT = startTime;
+    wheel.classList.add('dragging');
+  }
+  function move(x, y) {
+    if (!drag) return;
+    let d = angleAt(x, y) - startAngle;
+    if (d >  180) d -= 360;
+    if (d < -180) d += 360;
+    moved = Math.max(moved, Math.abs(d));
+    const t = startTime + degToMs(d);
+    vel = t - lastT; lastT = t;
+    setTime(t);
+  }
+  function up() {
+    if (!drag) return;
+    drag = false;
+    wheel.classList.remove('dragging');
+    if (reduced) return;
+    let v = Math.max(-DUR / 40, Math.min(DUR / 40, vel));   // acota el impulso
+    let t = now();
+    (function coast() {
+      if (Math.abs(v) < DUR / 4000) { anims.forEach(a => a.play()); return; }
+      t += v; v *= 0.93;
+      setTime(t);
+      raf = requestAnimationFrame(coast);
+    })();
+  }
+
+  wheel.addEventListener('mousedown', e => { e.preventDefault(); down(e.clientX, e.clientY); });
+  window.addEventListener('mousemove', e => move(e.clientX, e.clientY), { passive: true });
+  window.addEventListener('mouseup', up);
+  wheel.addEventListener('touchstart', e => down(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+  wheel.addEventListener('touchmove',  e => move(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+  wheel.addEventListener('touchend', up);
+  wheel.addEventListener('touchcancel', up);
+  // un arrastre no debe abrir el lightbox
+  wheel.addEventListener('click', e => { if (moved > 4) { e.stopPropagation(); e.preventDefault(); } }, true);
+
+  gsap.fromTo('.wheel-item', { opacity: 0, scale: .5 }, {
+    opacity: 1, scale: 1, duration: 1, stagger: .05, ease: 'back.out(1.4)',
+    scrollTrigger: { trigger: '.wheel-stage', start: 'top 80%' }
   });
-
-  if (!prefersReduced) {
-    const tl = gsap.timeline({
-      scrollTrigger:{
-        trigger:'.wheel-stage',
-        start:'top bottom',
-        end:'bottom top',
-        scrub:1.2
-      }
-    });
-    tl.to(wheel, {rotation:360, ease:'none'}, 0);
-    tl.to(items,  {rotation:-360, ease:'none'}, 0);
-  }
-
-  // Touch/drag spin
-  let angle = 0, startY = 0, dragging = false, velocity = 0, lastY = 0, lastT = 0, rafId = 0;
-  function onStart(e) {
-    dragging = true; velocity = 0;
-    const pt = e.touches ? e.touches[0] : e;
-    startY = lastY = pt.clientY; lastT = Date.now();
-    cancelAnimationFrame(rafId);
-  }
-  function onMove(e) {
-    if (!dragging) return;
-    const pt = e.touches ? e.touches[0] : e;
-    const dy = pt.clientY - lastY;
-    const now = Date.now();
-    const dt = now - lastT || 1;
-    velocity = dy / dt;
-    angle += dy * 0.4;
-    gsap.set(wheel, { rotation: angle });
-    gsap.set(items, { rotation: -angle });
-    lastY = pt.clientY; lastT = now;
-  }
-  function onEnd() {
-    if (!dragging) return;
-    dragging = false;
-    function coast() {
-      if (Math.abs(velocity) < 0.01) return;
-      velocity *= 0.95;
-      angle += velocity * 16 * 0.4;
-      gsap.set(wheel, { rotation: angle });
-      gsap.set(items, { rotation: -angle });
-      rafId = requestAnimationFrame(coast);
-    }
-    coast();
-  }
-  wheel.addEventListener('touchstart', onStart, { passive: true });
-  wheel.addEventListener('touchmove', onMove, { passive: true });
-  wheel.addEventListener('touchend', onEnd);
-  wheel.addEventListener('mousedown', onStart);
-  window.addEventListener('mousemove', onMove);
-  window.addEventListener('mouseup', onEnd);
+  gsap.fromTo('.wheel-spoke, .wheel-hub', { opacity: 0 }, {
+    opacity: 1, duration: 1.2, ease: 'power2.out',
+    scrollTrigger: { trigger: '.wheel-stage', start: 'top 80%' }
+  });
 }
 
 function initGalLightbox() {
@@ -3998,7 +4030,8 @@ function initGalLightbox() {
   const gallery = [];
   const seen = new Set();
   document.querySelectorAll('.wheel-item-inner img').forEach(img => {
-    const src = img.getAttribute('src');
+    // la rueda usa miniaturas; el lightbox abre la imagen grande (data-full)
+    const src = img.getAttribute('data-full') || img.getAttribute('src');
     if (src && !seen.has(src)) { seen.add(src); gallery.push({ src, alt: img.alt || '' }); }
   });
 
@@ -4044,7 +4077,7 @@ function initGalLightbox() {
     if (!img) return;
     el.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();
-      openLightbox(img.getAttribute('src'));
+      openLightbox(img.getAttribute('data-full') || img.getAttribute('src'));
     });
   });
   lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
@@ -4126,5 +4159,33 @@ function toast(msg) {
 })();
 </script>
 
+<script>
+/* ELYSIUM AUDIO UNLOCK v1 — la musica se estrena DENTRO del primer gesto real del invitado.
+   iOS/Chrome retiran el permiso del gesto a los pocos ms, asi que un play() que corre al
+   terminar el video del sobre llega tarde y es rechazado en silencio. */
+(function(){
+  if(window.__elyAudioUnlock) return; window.__elyAudioUnlock=1;
+  var done=false, tries=0;
+  function A(){ return document.querySelector('audio'); }
+  function unlock(){
+    if(done) return;
+    var a=A(); if(!a) return;
+    try{ if(a.preload==='none'){ a.preload='auto'; a.load(); } }catch(e){}
+    if(!a.paused){ done=true; return; }
+    var p;
+    try{ p=a.play(); }catch(e){ return; }
+    if(p && p.then){ p.then(function(){ done=true; }).catch(function(){}); }
+    else { done=true; }
+  }
+  ['pointerdown','touchstart','touchend','click','keydown'].forEach(function(ev){
+    document.addEventListener(ev, unlock, {capture:true, passive:true});
+  });
+  var iv=setInterval(function(){
+    var a=A();
+    if(done || (a && !a.paused)){ done=true; clearInterval(iv); return; }
+    if(++tries>120) clearInterval(iv);
+  },1000);
+})();
+</script>
 </body>
 </html>
